@@ -1,0 +1,54 @@
+:root {
+    --wrapper-background: #d1d1d1 ;
+    --screen-background: #8cd15ea6 ;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+.wrapper{
+    background-color: var(--wrapper-background);
+    border-radius: 15px;
+    height: 500px ;
+    width: 300px;
+    padding: 0px 35px;
+}
+
+.screen {
+    background-color: var(--screen-background);
+    border-radius: 15px;
+    height: 40px; 
+    font-size: 32px;
+}
+
+/* footer */
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px;
+  font-size: 20px;
+}
+
+.github-logo {
+  display: block;
+  max-width: 28px;
+  max-height: 28px;
+}
+
+/* button idea style */
+/* https://uiverse.io/Voxybuns/lucky-fireant-71 */
