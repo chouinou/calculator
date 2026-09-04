@@ -1,6 +1,8 @@
 :root {
     --wrapper-background: #d1d1d1 ;
     --screen-background: #8cd15ea6 ;
+    --outline: #000000;
+    --border-radius: 15px;
 }
 
 * {
@@ -17,17 +19,35 @@ body {
 
 .wrapper{
     background-color: var(--wrapper-background);
-    border-radius: 15px;
-    height: 500px ;
-    width: 300px;
-    padding: 0px 35px;
+    border: 2px solid var(--outline);
+    border-radius: var(--border-radius);
+    height: 520px ;
+    width: 350px;
+    padding: 30px 35px;
 }
 
 .screen {
+    display: flex;
+    align-items: center;
+    justify-content: end;
     background-color: var(--screen-background);
-    border-radius: 15px;
-    height: 40px; 
-    font-size: 32px;
+    border: 2px solid var(--outline);
+    border-radius: var(--border-radius);
+    height: 70px; 
+    font-size: 36px ;
+    padding-right: 10px;
+}
+
+.calc-display {
+    display: flex ;
+    flex-direction: column;
+    padding-top: 20px;
+}
+
+.button-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 5% 0;
 }
 
 /* footer */
@@ -51,4 +71,45 @@ body {
 }
 
 /* button idea style */
-/* https://uiverse.io/Voxybuns/lucky-fireant-71 */
+
+
+button {
+  /* Variables */
+  --button_radius: 0.75em;
+  --button_color: #e8e8e8;
+  font-size: 17px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--button_radius);
+  background: var(--outline);
+}
+
+.calc-button {
+  box-sizing: border-box;
+  border: 2px solid var(--outline);
+  border-radius: var(--button_radius);
+  padding: 0.75em 1.5em;
+  background: var(--button_color);
+  color: var(--outline);
+  transform: translateY(-0.2em);
+  transition: transform 0.1s ease;
+}
+
+button:hover .calc-button {
+  /* Pull the button upwards when hovered */
+  transform: translateY(-0.33em);
+}
+
+button:active .calc-button {
+  /* Push the button downwards when pressed */
+  transform: translateY(0);
+}
+
+#clear {
+    background-color: lightcoral;
+}
+
+#plus, #minus, #multiply, #divide {
+    background-color: lightseagreen;
+}
