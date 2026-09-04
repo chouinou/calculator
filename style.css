@@ -21,19 +21,20 @@ body {
     background-color: var(--wrapper-background);
     border: 2px solid var(--outline);
     border-radius: var(--border-radius);
-    height: 520px ;
+    height: 550px ;
     width: 350px;
     padding: 30px 35px;
 }
 
 .screen {
     display: flex;
-    align-items: center;
-    justify-content: end;
+    flex-direction: column;
+    justify-content: end ;
+    align-items: end;
     background-color: var(--screen-background);
     border: 2px solid var(--outline);
     border-radius: var(--border-radius);
-    height: 70px; 
+    height: 100px; 
     font-size: 36px ;
     padding-right: 10px;
 }
@@ -49,29 +50,6 @@ body {
     justify-content: space-between;
     margin: 5% 0;
 }
-
-/* footer */
-.footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  width: 100%;
-  padding: 10px;
-  font-size: 20px;
-}
-
-.github-logo {
-  display: block;
-  max-width: 28px;
-  max-height: 28px;
-}
-
-/* button idea style */
-
 
 button {
   /* Variables */
@@ -92,24 +70,32 @@ button {
   padding: 0.75em 1.5em;
   background: var(--button_color);
   color: var(--outline);
-  transform: translateY(-0.2em);
-  transition: transform 0.1s ease;
-}
-
-button:hover .calc-button {
-  /* Pull the button upwards when hovered */
-  transform: translateY(-0.33em);
-}
-
-button:active .calc-button {
-  /* Push the button downwards when pressed */
-  transform: translateY(0);
 }
 
 #clear {
     background-color: lightcoral;
 }
 
-#plus, #minus, #multiply, #divide {
+#operator {
     background-color: lightseagreen;
+}
+
+/* footer */
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px;
+  font-size: 20px;
+}
+
+.github-logo {
+  display: block;
+  max-width: 28px;
+  max-height: 28px;
 }
