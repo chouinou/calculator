@@ -1,3 +1,6 @@
+/* To do
+- clean the code */
+
 :root {
     --wrapper-background: #d1d1d1 ;
     --screen-background: #8cd15ea6 ;
@@ -78,6 +81,10 @@ button {
 
 #operator {
     background-color: lightseagreen;
+}
+
+#equal {
+    background-color: ;
 }
 
 /* footer */

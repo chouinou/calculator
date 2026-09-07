@@ -1,8 +1,14 @@
+// // -- Still to-do :
+// - check how the operand are set on each function. Maybe had a currentoperation variable ?
+// - calculate if operation is pressed while an operator is set
+// - arrow function (slice ?)
+// - dot button
+// - round long numbers
+
 
 // <----------- Variables ----------->
 let firstOperand = ""
 let secondOperand = ""
-let currentOperation = null
 let operationType = null
 
 const lastOperationScreen = document.getElementById("lastOperationScreen")
@@ -25,22 +31,35 @@ function appendNumber(number) {
     currentOperationScreen.textContent += number ;
 }
 
-function evaluate(a, b) {
-  a = Number(a)
-  b = Number(b)
+function calculate(a,b) {
+    a = Number(a)
+    b = Number(b)
+
+    console.log(firstOperand) ;
+    console.log(operationType) ;
+    console.log(secondOperand) ;
+
   switch (operationType) {
-    case '+':
-      return add(a, b)
-    case '−':
-      return substract(a, b)
-    case '×':
-      return multiply(a, b)
-    case '÷':
-      if (b === 0) return null
-      else return divide(a, b)
+    case "+":
+        lastOperationScreen.textContent = add(a,b) ;
+        break ;
+    case "−":
+        lastOperationScreen.textContent = substract(a,b) ;
+        break ;
+    case "×":
+        lastOperationScreen.textContent =  multiply(a,b) ;
+        break ;
+    case "÷":
+        if (secondOperand == 0) {
+            return  null ;
+        }
+        lastOperationScreen.textContent =  divide(a,b) ;;
+        break ;
     default:
-      return null
-}}
+        return null
+  }
+  currentOperationScreen.textContent = '' ;
+}
 
 function clear() {
     currentOperationScreen.textContent = '' ;
@@ -51,8 +70,6 @@ function clear() {
 }
 
 function setOperation(type) {
-    // // Doing the math
-    if (operationType !== null) evaluate() ;
     // data saving
     firstOperand = currentOperationScreen.textContent ;
     currentOperationScreen.textContent = null ;
@@ -86,4 +103,7 @@ operatorButtons.forEach((button) =>
     button.addEventListener('click', () => setOperation(button.textContent)))
 
 
+equalButton.addEventListener('click', () => {
+    secondOperand = currentOperationScreen.textContent ;
+    calculate(firstOperand, secondOperand)})
 
