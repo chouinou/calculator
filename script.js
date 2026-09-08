@@ -1,10 +1,6 @@
 // // -- Still to-do :
-// - check how the operand are set on each function. Maybe had a currentoperation variable ?
-// - calculate if operation is pressed while an operator is set
-// - arrow function (slice ?)
-// - dot button
 // - round long numbers
-
+// - more test on keyboardinput
 
 // <----------- Variables ----------->
 let firstOperand = ""
@@ -14,53 +10,20 @@ let operationType = null
 const lastOperationScreen = document.getElementById("lastOperationScreen")
 const currentOperationScreen = document.getElementById("currentOperationScreen")
 
-
 // Buttons
 const numberButtons = document.querySelectorAll('#number')
 const operatorButtons = document.querySelectorAll('#operator')
 
 const clearButton = document.getElementById('clear')
-const equalButton = document.getElementById('equal')
+const backspaceButton = document.getElementById('backspace')
 const plusButton = document.getElementById('plus')
 const minusButton = document.getElementById('minus')
 const multiplyButton = document.getElementById('multiply')
 const divideButton = document.getElementById('divide')
+const equalButton = document.getElementById('equal')
+const dotButton = document.getElementById('dot')
 
 // <----------- Functions ----------->
-function appendNumber(number) {
-    currentOperationScreen.textContent += number ;
-}
-
-function calculate(a,b) {
-    a = Number(a)
-    b = Number(b)
-
-    console.log(firstOperand) ;
-    console.log(operationType) ;
-    console.log(secondOperand) ;
-
-  switch (operationType) {
-    case "+":
-        lastOperationScreen.textContent = add(a,b) ;
-        break ;
-    case "−":
-        lastOperationScreen.textContent = substract(a,b) ;
-        break ;
-    case "×":
-        lastOperationScreen.textContent =  multiply(a,b) ;
-        break ;
-    case "÷":
-        if (secondOperand == 0) {
-            return  null ;
-        }
-        lastOperationScreen.textContent =  divide(a,b) ;;
-        break ;
-    default:
-        return null
-  }
-  currentOperationScreen.textContent = '' ;
-}
-
 function clear() {
     currentOperationScreen.textContent = '' ;
     lastOperationScreen.textContent = '' ;
@@ -69,12 +32,65 @@ function clear() {
     secondOperand = '' ;
 }
 
+function backspace() {
+    currentOperationScreen.textContent = 
+    currentOperationScreen.textContent.toString().slice(0,-1) ; 
+}
+
+function appendNumber(number) {
+    currentOperationScreen.textContent += number ;
+}
+
+function appendDot() {
+    if (currentOperationScreen.textContent === '') {
+        currentOperationScreen.textContent = '0'}
+    if (currentOperationScreen.textContent.includes('.')) {
+        return}
+    currentOperationScreen.textContent += '.'
+}
+
 function setOperation(type) {
-    // data saving
     firstOperand = currentOperationScreen.textContent ;
-    currentOperationScreen.textContent = null ;
+    if (operationType !== null) {
+        check()
+    }
+    // data saving
     operationType = type ;
+    currentOperationScreen.textContent = null ;
     lastOperationScreen.textContent = `${firstOperand} ${operationType}` ;
+}
+
+function check() {
+    secondOperand = currentOperationScreen.textContent ;
+    if (operationType == '÷' && secondOperand == 0 ) {
+        clear() ;
+        alert("You can't divide by 0.") ;
+    } else {
+        calculate(firstOperand,secondOperand) ;
+    }
+}
+
+function calculate(a,b) {
+    a = Number(a)
+    b = Number(b)
+
+  switch (operationType) {
+    case "+":
+        currentOperationScreen.textContent = add(a,b) ;
+        break ;
+    case "−":
+       currentOperationScreen.textContent = substract(a,b) ;
+        break ;
+    case "×":
+       currentOperationScreen.textContent =  multiply(a,b) ;
+        break ;
+    case "÷":
+        currentOperationScreen.textContent =  divide(a,b) ;
+    default:
+        return null
+  }
+    lastOperationScreen.textContent = '' ;
+    operationType = null ;
 }
 
 function add(a,b) {
@@ -93,8 +109,30 @@ function divide(a,b) {
     return a / b ;
 }
 
+function roundResult(number) {
+  return Math.round(number * 1000) / 1000 }
+
+function convertOperator(keyboardOperator) {
+  if (keyboardOperator === '/') return '÷'
+  if (keyboardOperator === '*') return '×'
+  if (keyboardOperator === '-') return '−'
+  if (keyboardOperator === '+') return '+'
+}
+
+function keyboardInput(e) {
+    if (e.key >= 0 && e.key <= 9) appendNumber(e.key) ;
+    if (e.key === ".") appendDot() ;
+    if (e.key === 'Backspace') backspace() ;
+    if (e.key === '=' || e.key === 'Enter') check() ;
+    if (e.key === 'c') clear() ;
+    if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/') 
+        setOperation(convertOperator(e.key))
+}
+
 // <----------- Events listeners ----------->
 clearButton.addEventListener('click', clear)
+backspaceButton.addEventListener('click', backspace)
+dotButton.addEventListener('click', appendDot)
 
 numberButtons.forEach((button) =>
     button.addEventListener('click', () => appendNumber(button.textContent)))
@@ -102,8 +140,6 @@ numberButtons.forEach((button) =>
 operatorButtons.forEach((button) =>
     button.addEventListener('click', () => setOperation(button.textContent)))
 
+equalButton.addEventListener('click', check)
 
-equalButton.addEventListener('click', () => {
-    secondOperand = currentOperationScreen.textContent ;
-    calculate(firstOperand, secondOperand)})
-
+window.addEventListener('keydown', keyboardInput)
