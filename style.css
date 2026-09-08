@@ -1,11 +1,13 @@
 /* To do
-- clean the code */
+- wrap the overflowing text */
 
 :root {
     --wrapper-background: #d1d1d1 ;
     --screen-background: #8cd15ea6 ;
     --outline: #000000;
+    --button_color: #e8e8e8;
     --border-radius: 15px;
+    --button_radius: 15px;
 }
 
 * {
@@ -56,8 +58,6 @@ body {
 
 button {
   /* Variables */
-  --button_radius: 0.75em;
-  --button_color: #e8e8e8;
   font-size: 17px;
   font-weight: bold;
   border: none;
@@ -84,7 +84,7 @@ button {
 }
 
 #equal {
-    background-color: ;
+    background-color: lightslategray;
 }
 
 /* footer */
